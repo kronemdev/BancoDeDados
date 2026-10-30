@@ -72,3 +72,72 @@ CREATE TABLE TELEFONE_CLIENTE(
    CONSTRAINT fk_TELEFONE_CLIENTE_CLIENTE FOREIGN KEY (cpf_cliente) REFERENCES CLIENTE (cpf)
 );
 GO
+
+------------------------------------------------------------------------------------------------------
+
+-- Exercício 4 — Pizzaria com dados (continuação da Aula 06). No banco Pizzaria, escreva o script **Pizzaria_DML.sql** com:
+
+USE PIZZARIA;
+GO
+
+--1. Pelo menos 5 clientes (um deles com CPF começando com 0), 2 telefones para pelo menos 2 clientes, 3 entregadores e 6 pizzas.
+
+INSERT INTO CLIENTE (cpf, nome, rua, numero, bairro) VALUES (02512458977,'Maria', 'Pitangueiras', '25', 'Saúde'),
+                                                            (25879641236,'João', 'Acarajé', '100', 'Ipiranga'),
+                                                            (58714789633,'José', 'Chacara Inglesa', '147', 'Vila Mariana'),
+                                                            (25896314788,'Lula', 'Congresso', '13', 'Palacio'),
+                                                            (14587452369,'Francisco', 'Kilimanjaro', '50', 'Morumbi')
+
+INSERT INTO TELEFONE_CLIENTE (telefone, cpf_cliente) VALUES (11945852233, 02512458977),
+                                                            (11958749633, 02512458977),
+                                                            (11952418745, 25879641236),
+                                                            (11989745214, 25879641236)
+
+INSERT INTO ENTREGADOR (matricula, nome, placa_moto) VALUES (147852, 'Murillo', 'JHU1254'),
+                                                            (258749, 'Jesse', 'KJH7415'),
+                                                            (364125, 'Fabio', 'GTR5897')
+
+INSERT INTO PIZZA (codigo, sabor, preco) VALUES (001, 'Marguerita', 40.50),
+                                                (002, '4 Queijos', 50.50),
+                                                (003, 'Calabresa', 35.50),
+                                                (004, 'Mussarela', 32.50),
+                                                (005, 'Lombinho', 42.50),
+                                                (006, 'Frango Cremoso', 45.50)
+
+--2. Pelo menos 8 pedidos em datas diferentes, com 1 a 3 itens cada. Deixe pelo menos **um cliente sem pedido** e **uma pizza que nunca foi pedida** (vamos usar isso na Aula 09).
+
+INSERT INTO PEDIDO (numero, data_pedido, hora, cpf_cliente, matricula_entregador) VALUES (0001, '2026-10-25', '22:30:00', 02512458977, 147852),
+                                                                                  (0002, '2026-09-12', '21:00:00', 25879641236, 364125),
+                                                                                  (0003, '2026-10-10', '20:15:00', 25879641236, 147852),
+                                                                                  (0004, '2026-09-15', '22:00:00', 58714789633, 364125),
+                                                                                  (0005, '2026-10-09', '19:30:00', 58714789633, 147852),
+                                                                                  (0006, '2026-08-20', '20:45:00', 25896314788, 258749),
+                                                                                  (0007, '2026-06-13', '22:20:00', 25896314788, 147852),
+                                                                                  (0008, '2026-05-18', '21:50:00', 02512458977, 258749)
+
+INSERT INTO ITEM_PEDIDO (quantidade, numero_pedido, codigo_pizza) VALUES (1, 0001, 001),
+                                                                         (2, 0002, 003),
+                                                                         (3, 0003, 005),
+                                                                         (4, 0004, 002),
+                                                                         (5, 0005, 001),
+                                                                         (6, 0006, 002),
+                                                                         (7, 0007, 002),
+                                                                         (8, 0008, 003)
+
+--3. Um UPDATE que aumenta em 10% o preço de todas as pizzas.
+
+UPDATE PIZZA SET preco = preco * 1.10;
+
+--4. Um DELETE que cancela um pedido inteiro (itens e pedido).
+
+DELETE FROM ITEM_PEDIDO WHERE quantidade = 1;
+
+DELETE FROM PEDIDO WHERE numero = 0001;
+
+
+
+SELECT * FROM CLIENTE
+SELECT * FROM ENTREGADOR
+SELECT * FROM PEDIDO
+SELECT * FROM ITEM_PEDIDO
+SELECT * FROM PIZZA
