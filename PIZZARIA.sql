@@ -158,25 +158,57 @@ SELECT * FROM PIZZA
 
 
 1.
-SELECT * from pizza order by preco desc
+SELECT * 
+from pizza 
+order by preco desc
+-----------------------
 2.
-select top 3 * from PIZZA order by preco 
+select top 3 * 
+from PIZZA 
+order by preco 
+-----------------------
 3.
-select * from PIZZA where preco between 50 and 60 
+select * 
+from PIZZA 
+where preco between 50 and 60 
+-----------------------
 4.
-select * from cliente where bairro = 'centro' or bairro = 'Jardim'
+select * 
+from cliente 
+where (bairro = 'Morumbi' or bairro = 'Vila Mariana')
+-----------------------
 5.
-select * from PEDIDO where data_pedido  <= '2026-10-01' and data_pedido <='2026-10-31'
+select * 
+from PEDIDO 
+where data_pedido  <= '2026-10-01' and data_pedido <='2026-10-31'
+-----------------------
 6.
-select cpf_cliente , count (*) as total_vendido from PEDIDO group by cpf_cliente order by total_vendido desc
+select cpf_cliente , count (*) as total_vendido 
+from PEDIDO 
+group by cpf_cliente 
+order by total_vendido desc
+-----------------------
 7.
-select COUNT(numero) as quantidade_de_vendas from PEDIDO group by cpf_cliente order by quantidade_de_vendas desc
+select codigo_pizza, sum(quantidade) as qtd_pedido 
+from ITEM_PEDIDO 
+group by codigo_pizza
+-----------------------
 8.
-select matricula_entregador , count (*) as quantidade_entregas from PEDIDO group by matricula_entregador having count (*) >2
+select matricula_entregador , count (*) as quantidade_entregas 
+from PEDIDO 
+group by matricula_entregador
+having count (*) >2
+-----------------------
 9.
-select cast (avg (preco) as decimal (10,2)) as preco_medio, min (preco) as minimo_preco ,max (preco) as preco_maximo from PIZZA
+select cast (avg (preco) as decimal (10,2)) as preco_medio,
+min (preco) as minimo_preco ,
+max (preco) as preco_maximo from PIZZA
+-----------------------
 10.
-select data_pedido, count (*) as pedidos_do_dia from pedido group by data_pedido having count (data_pedido) >=1 
+select data_pedido, count (*) as pedidos_do_dia
+from pedido 
+group by data_pedido 
+having count (data_pedido) >=1 
 
 
 
