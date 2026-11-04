@@ -141,3 +141,36 @@ SELECT * FROM ENTREGADOR
 SELECT * FROM PEDIDO
 SELECT * FROM ITEM_PEDIDO
 SELECT * FROM PIZZA
+
+
+/**Exercício 1 — Pizzaria (continuação da Aula 07).** No banco Pizzaria:
+
+1. Todas as pizzas da mais cara para a mais barata.
+2. As 3 pizzas mais baratas.
+3. Pizzas com preço entre R $50 e R$ 60.
+4. Clientes que moram no Centro ou no Jardim.
+5. Pedidos feitos em outubro de 2026.
+6. Quantos pedidos cada cliente fez (cpf e quantidade), do maior para o menor.
+7. Quantas pizzas (soma das quantidades) foram vendidas de cada código de pizza.
+8. Entregadores (matrícula) que fizeram mais de 2 entregas.
+9. Preço médio, menor e maior preço das pizzas.
+10. Quantos pedidos houve em cada dia, só dos dias com mais de 1 pedido.*/
+
+
+1.
+SELECT * from pizza order by preco desc
+2.
+select top 3 * from PIZZA order by preco 
+3.
+select * from PIZZA where preco between 50 and 60 
+4.
+select * from cliente where bairro = 'centro' or bairro = 'Jardim'
+5.
+select * from PEDIDO where data_pedido  <= '2026-10-01' and data_pedido <='2026-10-31'
+6.
+select cpf_cliente , count (*) as total_vendido from PEDIDO group by cpf_cliente order by total_vendido desc
+
+
+
+
+
