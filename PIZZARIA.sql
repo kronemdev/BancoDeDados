@@ -212,4 +212,5 @@ having count (data_pedido) >=1
 
 
 
-
+use Escola
+select * from CURSO
